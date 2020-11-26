@@ -2,32 +2,33 @@
 Exploration Enhanced RPSO for Collaborative Multi-target Searching of Robotic Swarms
 # Usage
 ### E2RPSO
-'''
+```
 import E2RPSO
 E2RPSO()
 
-'''
+```
 ### MLPSO
-'''
+```
 import MLPSO
 MLPSO()
 
-'''
+```
 ### RDPSO
-'''
+```
 import RDPSO
 RDPSO()
 
-'''
+```
 ### RPSO
-'''
+```
 import RPSO
 RPSO()
 
-'''
+```
 # Configuration
 ### E2RPSO
 |Parameters|Describe|Value|
+|----------|--------|-----|
 |PBEST|Initialize Pbest|2000000000|
 |GBEST|Initialize Gbest|2000000000|
 |save|Safety distance of obstacle avoidance|1|
@@ -49,6 +50,7 @@ RPSO()
 
 ### MLPSO
 |Parameters|Describe|Value|
+|----------|--------|-----|
 |PBEST|Initialize Pbest|2000000000|
 |GBEST|Initialize Gbest|2000000000|
 |save|Safety distance of obstacle avoidance|1|
@@ -70,6 +72,7 @@ RPSO()
 
 ### RDPSO
 |Parameters|Describe|Value|
+|----------|--------|-----|
 |PBEST|Initialize Pbest|2000000000|
 |GBEST|Initialize Gbest|2000000000|
 |save|Safety distance of obstacle avoidance|1|
@@ -89,6 +92,7 @@ RPSO()
 
 ### RPSO
 |Parameters|Describe|Value|
+|----------|--------|-----|
 |PBEST|Initialize Pbest|2000000000|
 |GBEST|Initialize Gbest|2000000000|
 |save|Safety distance of obstacle avoidance|1|
