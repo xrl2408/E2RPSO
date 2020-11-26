@@ -61,12 +61,7 @@ def RDPSO():
     # PSO parameters
     C1 = config.getfloat('RDPSO','C1')
     C2 = config.getfloat('RDPSO','C2')
-    C3_index = config.getint('RDPSO','C3_index')
-    C4_index = config.getint('RDPSO','C4_index')
-    K = config.getint('RDPSO','K')
 
-    C3 = C3_index * C2
-    C4 = C4_index * SIDE
 
     gbest = GBEST
     gx = 0
@@ -84,8 +79,8 @@ def RDPSO():
     while t < T:
         t = t + 1
 
-        w = config.getboolean('RDPSO', 'W_UPPERBOUND') - (t / T) * (
-                    config.getboolean('RDPSO', 'W_UPPERBOUND') - config.getboolean('RDPSO', 'W_LOWERBOUND'))
+        w = config.getfloat('RDPSO', 'W_UPPERBOUND') - (t / T) * (
+                    config.getfloat('RDPSO', 'W_UPPERBOUND') - config.getfloat('RDPSO', 'W_LOWERBOUND'))
 
         # update best_avg
         best_avg = RDPSO_util.update_best_avg(robot_list)
@@ -99,6 +94,13 @@ def RDPSO():
         # if find all target , return
         if len(goal_list_x) == 0:
             break
+
+        # find and change fugitive
+        if t % 50 == 0 and t > 0:
+            robot_list.sort(key=lambda x: x.pbest)
+            for i in range(0, int(20 / 5)):
+                robot_list[20 - i - 1].fugitive = 1
+                robot_list[i].fugitive = 0
 
         # Traverse all robots
         for i in range(len(robot_list)):
@@ -150,8 +152,13 @@ def RDPSO():
             xp, yp, xg, yg = RDPSO_util.Unit_speed(r, gx, gy)
 
             # update velocity , using RDPSO
-            v_x = w * r.Vx + r1 * c1 * xp + c2 * r2 * xg + c3 * r3 * (pa_x - r.x)
-            v_y = w * r.Vy + r1 * c1 * yp + c2 * r2 * yg + c3 * r3 * (pa_y - r.y)
+            if r.fugitive == 0:
+                v_x = w * r.Vx + r1 * c1 * xp + c2 * r2 * xg + c3 * r3 * (po_x - r.x)
+                v_y = w * r.Vy + r1 * c1 * yp + c2 * r2 * yg + c3 * r3 * (po_y - r.y)
+
+            else :
+                v_x = (1+random.uniform(-1, 1))*w * vx + c3 * r3 * (po_x - r.x)
+                v_y = (1+random.uniform(-1, 1))*w * vy + c3 * r3 * (po_y - r.y)
 
             # limit max velocity
             v_x, v_y = RDPSO_util.Limit_maxVelocity(v_x, v_y, V_LIMIT)

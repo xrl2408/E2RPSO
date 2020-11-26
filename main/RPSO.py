@@ -61,12 +61,7 @@ def RPSO():
     # PSO parameters
     C1 = config.getfloat('RPSO','C1')
     C2 = config.getfloat('RPSO','C2')
-    C3_index = config.getint('RPSO','C3_index')
-    C4_index = config.getint('RPSO','C4_index')
-    K = config.getint('RPSO','K')
 
-    C3 = C3_index * C2
-    C4 = C4_index * SIDE
 
     gbest = GBEST
     gx = 0
@@ -87,6 +82,9 @@ def RPSO():
         # update best_avg
         best_avg = RPSO_util.update_best_avg(robot_list)
 
+        w = config.getfloat('RPSO', 'W_UPPERBOUND') - (t / T) * (
+                config.getfloat('RPSO', 'W_UPPERBOUND') - config.getfloat('RPSO', 'W_LOWERBOUND'))
+
         # print info
         if can_print == 1:
             print("---------------{}---------------".format(t))
@@ -103,7 +101,7 @@ def RPSO():
             if t % 10 == 0:
                 c1 = C1
                 c2 = C2
-            c3 = 0
+            c3 = config.getint('RPSO', 'C3')
             r = robot_list[i]
             if r.reach == 1:
                 continue

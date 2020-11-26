@@ -34,6 +34,7 @@ class Robot:
     px = 0
     py = 0
     reach = 0
+    fugitive = 0
 
     def __init__(self, id, Vx, Vy, x, y):
         self.id = id
