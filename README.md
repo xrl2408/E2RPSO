@@ -1,5 +1,19 @@
 # E2RPSO
 Exploration Enhanced RPSO for Collaborative Multi-target Searching of Robotic Swarms
+# File
+#### /main/
+* E2RPSO.py : main of E2RPSO
+* MLPSO.py : main of MLPSO
+* RDPSO.py : main of RDPSO
+* RPSO.py : main of RPSO
+#### /Congiguration/
+* congiguration/setting.ini : all parameters in 4 algorithm
+#### /util/
+* util/util.py : base method
+* util/E2RPSO_util.py : method used in E2RPSO
+* util/MLPSO_util.py : method used in MLPSO
+* util/RDPSO_util.py : method used in RDPSO
+* util/RPSO_util.py : method used in RPSO
 # Usage
 ### E2RPSO
 ```
